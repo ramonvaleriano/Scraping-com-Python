@@ -1,16 +1,42 @@
-# This is a sample Python script.
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+url = 'https://alura-site-scraping.herokuapp.com/hello-world.php'
 
+# Vamos passar o url pela função que irá abrir todos os
+# dados que se encontram na url
+response = urlopen(url)
+# Vamos ler esse dados em html
+html = response.read()
+# Vamos criar um object tipo soup para ficar mais légivel
+# para nós e para a máquina também.
+soup = BeautifulSoup(html, 'html.parser')
+# Através de Algumas funcionabilidades nós podemos obeter
+# resultados filtrados.
+dado_test = soup.find('h1', id='hello-world')
+# Com apenas o texto
+dado_test2 = soup.find('h1', id='hello-world').get_text()
+# Vamos agora pegar os dados da subscrição
+dado_test3 = soup.find('p')
+# Apenas o texto
+dado_test4 = soup.find('p').get_text()
+# Filtrando ainda mais
+dado_test5 = soup.find('p', {'class': 'definition'})
+# Apenas o texto
+dado_test6 = soup.find('p', {'class': 'definition'}).get_text()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print('>>>>>>>>Inicio - Testes<<<<<<<<<')
+print('O html')
+print(html)
+print('O soup\n\n')
+print(soup)
+print('\n\nH1')
+print(dado_test)
+print('h1 doidera')
+print(dado_test2)
+print('subtítulo')
+print(dado_test3)
+print(dado_test4)
+print(dado_test5)
+print(dado_test6)
+print('>>>>>>>>>>>Fim - Testes<<<<<<<<<')
