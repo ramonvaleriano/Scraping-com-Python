@@ -25,4 +25,5 @@ html = criando_html(request)
 html_tratado = tratando_html(html)
 
 soup = BeautifulSoup(html_tratado, 'html.parser')
-print(soup)
+soup_html = soup.prettify()
+print(soup.html)
